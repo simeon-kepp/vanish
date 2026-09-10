@@ -1,0 +1,64 @@
+# VANISH — Data broker removal endpoints
+brokers:
+  - name: Spokeo
+    jurisdictions: [GDPR, CCPA]
+    removal:
+      method: email
+      endpoint: privacy@spokeo.com
+    verification:
+      method: url_check
+    recheck_after_days: 14
+    difficulty: moderate
+  - name: Whitepages
+    jurisdictions: [GDPR, CCPA]
+    removal:
+      method: email
+      endpoint: privacy@whitepages.com
+    verification:
+      method: url_check
+    recheck_after_days: 14
+    difficulty: moderate
+  - name: BeenVerified
+    jurisdictions: [GDPR, CCPA]
+    removal:
+      method: webform
+      url: https://www.beenverified.com/privacy/delete
+    verification:
+      method: url_check
+    recheck_after_days: 14
+    difficulty: easy
+  - name: Intelius
+    jurisdictions: [GDPR]
+    removal:
+      method: email
+      endpoint: privacy@intelius.com
+    verification:
+      method: url_check
+    recheck_after_days: 21
+    difficulty: moderate
+  - name: Radaris
+    jurisdictions: [GDPR, CCPA]
+    removal:
+      method: webform
+      url: https://www.radaris.com/opt-out
+    verification:
+      method: url_check
+    recheck_after_days: 14
+    difficulty: easy
+  - name: TruthFinder
+    jurisdictions: [GDPR, CCPA]
+    removal:
+      method: email
+      endpoint: support@truthfinder.com
+    verification:
+      method: url_check
+    recheck_after_days: 14
+    difficulty: moderate
+search_engines:
+  - name: Google
+    removal_endpoint: https://support.google.com/websearch/answer/12719076
+    jurisdiction: global
+breach_sources:
+  - name: Have I Been Pwned
+    url: https://haveibeenpwned.com
+    privacy_mode: true

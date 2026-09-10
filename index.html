@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="VANISH — Digital Footprint Remediation Engine">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="manifest" href="/manifest.json">
+<title>VANISH — Digital Footprint Remediation</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="app">
+  <header class="app-header">
+    <div class="logo">
+      <h1>VANISH</h1>
+      <span class="tagline">Digital Footprint Remediation Engine</span>
+    </div>
+    <nav class="app-nav">
+      <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+      <button class="nav-btn" data-view="identity">Identity</button>
+      <button class="nav-btn" data-view="scan">Scan</button>
+      <button class="nav-btn" data-view="remediation">Remediation</button>
+      <button class="nav-btn" data-view="verify">Verify</button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="view-dashboard" class="view active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value" id="stat-total">0</span>
+          <span class="stat-label">Discovered</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-removable">0</span>
+          <span class="stat-label">Removable</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-removed">0</span>
+          <span class="stat-label">Removed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-pending">0</span>
+          <span class="stat-label">Pending</span>
+        </div>
+      </div>
+      <div class="dashboard-panels">
+        <div class="panel">
+          <h2>Identity Graph</h2>
+          <div id="identity-graph">
+            <p class="empty-state">Run a scan to discover your digital footprint.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Recent Activity</h2>
+          <div id="activity-log">
+            <p class="empty-state">No activity yet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-identity" class="view">
+      <h2>Identity Profile</h2>
+      <form id="identity-form">
+        <fieldset>
+          <legend>Primary Identity</legend>
+          <div class="form-group">
+            <label for="primary-name">Primary Name</label>
+            <input type="text" id="primary-name" name="primary-name" placeholder="e.g. Max Mustermann">
+          </div>
+          <div class="form-group">
+            <label for="aliases">Known Aliases</label>
+            <textarea id="aliases" name="aliases" placeholder="one per line: johnsmith, jsmith"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="emails">Email Addresses</label>
+            <textarea id="emails" name="emails" placeholder="one per line: name@domain.com"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="usernames">Usernames</label>
+            <textarea id="usernames" name="usernames" placeholder="one per line: john94, j.smith"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="phones">Phone Numbers</label>
+            <textarea id="phones" name="phones" placeholder="one per line: +43..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="old-domains">Old Domains</label>
+            <textarea id="old-domains" name="old-domains" placeholder="one per line: olddomain.at"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="old-addresses">Old Addresses</label>
+            <textarea id="old-addresses" name="old-addresses" placeholder="one per line: oldstreet 1, 1234 City"></textarea>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Fingerprint Baseline</legend>
+          <div class="form-group">
+            <label for="browser-name">Browser</label>
+            <select id="browser-name">
+              <option value="">Select browser</option>
+              <option value="chrome">Chrome</option>
+              <option value="firefox">Firefox</option>
+              <option value="safari">Safari</option>
+              <option value="edge">Edge</option>
+              <option value="brave">Brave</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="os-name">Operating System</label>
+            <select id="os-name">
+              <option value="">Select OS</option>
+              <option value="windows">Windows</option>
+              <option value="macos">macOS</option>
+              <option value="linux">Linux</option>
+              <option value="android">Android</option>
+              <option value="ios">iOS</option>
+            </select>
+          </div>
+        </fieldset>
+        <button type="submit" class="btn-primary">Build Identity Graph</button>
+      </form>
+      <div id="identity-results" class="hidden"></div>
+    </section>
+
+    <section id="view-scan" class="view">
+      <h2>Scan Engine</h2>
+      <p>Scans discover where your identity data exists on the public web.</p>
+      <div class="scan-controls">
+        <button id="btn-start-scan" class="btn-primary">Start Discovery Scan</button>
+        <button id="btn-stop-scan" class="btn-secondary hidden">Stop</button>
+      </div>
+      <div id="scan-progress" class="hidden">
+        <div class="progress-bar">
+          <div class="progress-fill" id="scan-progress-fill"></div>
+        </div>
+        <span id="scan-status">Initializing...</span>
+      </div>
+      <div id="scan-results" class="scan-results hidden">
+        <h3>Discovery Results</h3>
+        <div id="scan-findings"></div>
+      </div>
+    </section>
+
+    <section id="view-remediation" class="view">
+      <h2>Remediation Pipeline</h2>
+      <div class="pipeline-controls">
+        <button id="btn-start-remediation" class="btn-primary">Start Remediation</button>
+        <select id="remediation-mode">
+          <option value="full">Full Automation</option>
+          <option value="review">Review First</option>
+          <option value="manual">Manual Only</option>
+        </select>
+      </div>
+      <div id="remediation-list"></div>
+    </section>
+
+    <section id="view-verify" class="view">
+      <h2>Verification & Monitoring</h2>
+      <p>Verify removals and detect reappearance.</p>
+      <div id="verification-status"></div>
+      <div class="monitoring-section">
+        <h3>Active Monitors</h3>
+        <div id="monitor-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>VANISH — Local-first digital footprint remediation. Your data stays on your machine.</p>
+  </footer>
+</div>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
