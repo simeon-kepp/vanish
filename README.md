@@ -6,6 +6,19 @@ Open-source digital footprint remediation engine.
 
 Local-first. No subscription. Your data stays on your machine.
 
+## 🚀 Try It Live
+
+VANISH is deployed as a PWA. Try it now:
+
+[![Install VANISH](https://img.shields.io/badge/Install-VANISH_PWA-informational?style=for-the-badge)](https://simeon-kepp.github.io/vanish)
+
+**[Open VANISH →](https://simeon-kepp.github.io/vanish)**
+
+The PWA installs directly from your browser — works on desktop and mobile.
+All data stays on your device. Nothing is sent to any server.
+
+---
+
 ## What VANISH does
 
 VANISH is not another privacy scanner. It is a **digital footprint remediation pipeline**:
