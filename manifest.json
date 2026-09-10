@@ -1,0 +1,11 @@
+{
+  "name": "VANISH \u2014 Digital Footprint Remediation",
+  "short_name": "VANISH",
+  "description": "Open-source digital footprint remediation engine",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "scope": "/",
+  "lang": "de"
+}
